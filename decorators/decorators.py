@@ -1,44 +1,28 @@
-# Simple function with arguments
-def simple_func_args(name):
-    print(f'Hello {name}')
+# Simple decorator that does nothing.
+# Return decorated function with argument.
+def decorator(f):
 
-    def inner_func():
-        print('A call from inner function')
-
-    inner_func()
-
-
-def wrong_sentance():
-    return "A senTancE That HavE to be ReworKeD"
-
-def fix_sentance(func):
-
-    print("Calling a function to fix our sentance")
-
-    sentance = func()
-    return sentance.capitalize()
-
-
-
-
-
-def decorator_function(func):
-    print('A decorator function was called')
-    
-    def wrapper():
-        print(func)
-
+    def wrapper(inner_name):
+        return f(inner_name)
     return wrapper
 
-# # Simple function
-# @decorator_function
-def simple_function(name):
+# General decorator that does nothing.
+# Return decorated function with args and kwargs.
+def general_decorator(f):
+
+    def wrapper(*args, **kwargs):
+        return f(*args, **kwargs)
+    return wrapper
+
+
+@decorator
+def get_name(name):
     return f'Hi, {name}'
 
 if __name__ == '__main__':
 
-    simple_function = decorator_function(simple_function('Jordan'))
-    simple_function()
+    username = get_name('Jordan')
+    print(username)
 
     
     
